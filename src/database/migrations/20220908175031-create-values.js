@@ -16,6 +16,9 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
+      name: {
+        type: Sequelize.STRING
+      },
       installmentValue: {
         type: Sequelize.DECIMAL(9,2)
       },

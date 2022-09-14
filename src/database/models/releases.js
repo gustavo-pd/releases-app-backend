@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     totalValue: DataTypes.DECIMAL(9, 2),
     installments: DataTypes.INTEGER,
     releaseDate: DataTypes.DATEONLY,
-    status: DataTypes.STRING,
+    paid: DataTypes.BOOLEAN,
   },
   {
     timestamps: false,

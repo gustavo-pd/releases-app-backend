@@ -7,7 +7,7 @@ const getAll = async (_req, res) => {
     res.status(200).json(result);
   } catch (e) {
     console.log(e.message);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: e.message });
   }
 };
 
@@ -19,32 +19,33 @@ const getById = async (req, res) => {
     res.status(200).json(result);
   } catch (e) {
     console.log(e.message);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: e.message });
   }
 };
 
 const createOne = async (req, res) => {
   try {
-    const { name, totalValue, installments, releaseDate, status } = req.body;
-    const result = await releasesService.createOne({ name, totalValue, installments, releaseDate, status });
+    const { name, totalValue, installments, releaseDate, paid } = req.body;
+    const result = await releasesService.createOne(
+      { name, totalValue, installments, releaseDate, paid },
+    );
 
     res.status(201).json(result);
   } catch (e) {
     console.log(e.message);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: e.message });
   }
 };
 
 const changeStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body;
-    const result = await releasesService.changeStatus(id, status);
+    const result = await releasesService.changeStatus(id);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 const deleteOne = async (req, res) => {
   try {
@@ -54,7 +55,7 @@ const deleteOne = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 module.exports = {
   getAll,
@@ -62,4 +63,4 @@ module.exports = {
   createOne,
   changeStatus,
   deleteOne,
-}
+};

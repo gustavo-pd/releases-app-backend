@@ -7,7 +7,7 @@ module.exports = {
         totalValue: 600,
         installments: 1,
         releaseDate: '2022-01-20',
-        status: 'Paid',
+        paid: true,
       },
       {
         id: 2,
@@ -15,7 +15,7 @@ module.exports = {
         totalValue: 1000,
         installments: 2,
         releaseDate: '2022-06-25',
-        status: 'Not paid',
+        paid: false,
       },
       {
         id: 3,
@@ -23,7 +23,7 @@ module.exports = {
         totalValue: 1500,
         installments: 3,
         releaseDate: '2022-08-15',
-        status: 'Not paid',
+        paid: false,
       },
       {
         id: 4,
@@ -31,7 +31,7 @@ module.exports = {
         totalValue: 300,
         installments: 1,
         releaseDate: '2022-08-15',
-        status: 'Not paid',
+        paid: false,
       },
       {
         id: 5,
@@ -39,7 +39,7 @@ module.exports = {
         totalValue: 200,
         installments: 1,
         releaseDate: '2022-08-17',
-        status: 'Not paid',
+        paid: false,
       },
       ], { timestamps: false });
   },

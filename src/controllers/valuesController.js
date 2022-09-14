@@ -7,7 +7,7 @@ const getAll = async (_req, res) => {
     res.status(200).json(result);
   } catch (e) {
     console.log(e.message);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: e.message });
   }
 };
 
@@ -19,11 +19,11 @@ const getById = async (req, res) => {
     res.status(200).json(result);
   } catch (e) {
     console.log(e.message);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: e.message });
   }
 };
 
 module.exports = {
   getAll,
   getById,
-}
+};

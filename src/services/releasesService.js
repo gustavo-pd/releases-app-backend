@@ -6,11 +6,11 @@ async function getAll() {
 }
 
 async function getById(id) {
-  const result = await releases.findByPk(id, { include: { model: values, as: 'release' } } );
+  const result = await releases.findByPk(id, { include: { model: values, as: 'release' } });
   return result;
 }
 
-async function createValues(releaseId, installments, installmentValue, releaseDate) {
+async function createValues(releaseId, name, installments, installmentValue, releaseDate) {
   let month = releaseDate.substr(5, 2);
   let day = releaseDate.substr(8, 2);
   let year = releaseDate.substr(0, 4);
@@ -30,20 +30,20 @@ async function createValues(releaseId, installments, installmentValue, releaseDa
           installStr = '0' + installStr;
         }
         let installmentDate = yearStr + '-' + installStr + '-' + day;
-        await values.create({ releaseId, installmentValue, installmentDate });
+        await values.create({ releaseId, name, installmentValue, installmentDate });
       } else {
       let installStr = installmentMonth.toString();
       if (installStr.length === 1) {
         installStr = '0' + installStr;
       }
       let installmentDate = year + '-' + installStr + '-' + day;
-      await values.create({ releaseId, installmentValue, installmentDate });
+      await values.create({ releaseId, name, installmentValue, installmentDate });
       }
     }
   }
 }
 
-async function createOne({ name, totalValue, installments, releaseDate, status }) {
+async function createOne({ name, totalValue, installments, releaseDate, paid }) {
   let day = releaseDate.substr(8, 2);
   let monthYear = releaseDate.substr(0, 8);
   let dayInt = parseInt(day);
@@ -53,16 +53,14 @@ async function createOne({ name, totalValue, installments, releaseDate, status }
     let date = monthYear + strDay;
     releaseDate = date;
   }
-  const result = await releases.create({ name, totalValue, installments, releaseDate, status });
+  const result = await releases.create({ name, totalValue, installments, releaseDate, paid });
   const installmentValue = totalValue / installments;
-  await createValues(result.id, installments, installmentValue, result.releaseDate);
+  await createValues(result.id, name, installments, installmentValue, result.releaseDate);
   return result;
 }
 
-async function changeStatus(id, status) {
-  await releases.update({ status }, { where: { id } });
-  const result = await releases.findOne({ where: { id } });
-  return result; 
+async function changeStatus(id) {
+  await releases.update({ paid: true }, { where: { id } });
 }
 
 async function deleteOne(id) {

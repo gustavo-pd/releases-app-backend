@@ -20,8 +20,8 @@ module.exports = {
       releaseDate: {
         type: Sequelize.DATEONLY
       },
-      status: {
-        type: Sequelize.STRING
+      paid: {
+        type: Sequelize.BOOLEAN
       }
     });
   },
